@@ -8,4 +8,13 @@
 
   tasks:
     - nxos_facts:
-
+    - name: Create vlan 2000
+      nxos_vlan:
+        vlan_id: 2000
+    - nxos_facts:
+    - name: Current vlans
+      debug: var=vlan_list    
+    - name: verify that vlan 2000 exists 
+      assert:
+        that:
+          - "'{{vlan_list}}' is match('2000')"
